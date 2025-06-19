@@ -111,41 +111,49 @@ The QuickMerge++ inference pipeline follows these steps:
 ## Mathematical Formulation
 
 ### Saliency Score
-```
-s_i = (1/L) * Σ_l Normalize(H_i^(l))
-```
-where `H_i^(l)` is the attention entropy at layer l.
+$$s_i = \frac{1}{L} \sum_l \text{Normalize}(H_i^{(l)})$$
+where $H_i^{(l)}$ is the attention entropy at layer l.
 
 ### Token Merging
-```
-π_i = exp((s_i + g_i)/τ) / Σ_j exp((s_j + g_j)/τ)
-x̃_k = Σ_{j∈G_k} (m̃_j * x_j) / Σ_{j'∈G_k} m̃_{j'}
-```
+$$\pi_i = \frac{\exp((s_i + g_i)/\tau)}{\sum_j \exp((s_j + g_j)/\tau)}$$
+$$\tilde{x}_k = \frac{\sum_{j \in G_k} (\tilde{m}_j \cdot x_j)}{\sum_{j' \in G_k} \tilde{m}_{j'}}$$
 
 ### AR Alignment Loss
-```
-L_AR = L_forward + L_backward
-```
+$$L_{AR} = L_{forward} + L_{backward}$$
 
 ## CUDA Kernel Design
 
 QuickMerge++ provides optimized CUDA kernels for acceleration:
 
 1. **attention_entropy_kernel**
-   - 计算多层注意力熵，用于token显著性。
+   - Computes multi-layer attention entropy for token saliency
    - $H_i = -\sum_j A_{ij} \log A_{ij}$
 
 2. **saliency_merging_kernel**
-   - 按聚类和显著性加权合并token。
+   - Merges tokens by clustering and saliency-weighted averaging
    - $\tilde{x}_k = \sum_{j \in G_k} (m_j x_j) / \sum_{j \in G_k} m_j$
 
 3. **cosine_similarity_kernel**
-   - 计算token对的余弦相似度。
+   - Computes pairwise cosine similarity between tokens
    - $\text{sim}_{ij} = \frac{x_i \cdot x_j}{\|x_i\|\|x_j\|}$
 
 4. **gumbel_softmax_kernel**
-   - Gumbel-Softmax采样，生成可微分mask。
+   - Gumbel-Softmax sampling for differentiable discrete masks
    - $\pi_i = \frac{\exp((s_i + g_i)/\tau)}{\sum_j \exp((s_j + g_j)/\tau)}$
+
+### Optimized Kernels
+
+The framework includes two CUDA implementations:
+
+- **`quickmerge.cu`**: Basic implementation with clean, readable code
+- **`quickmerge_optimized.cu`**: High-performance implementation with:
+  - Loop unrolling (4x) for better memory bandwidth
+  - Chunked processing for improved cache utilization
+  - Symmetry exploitation in cosine similarity computation
+  - Half-precision (FP16) support for memory efficiency
+  - Enhanced numerical stability and random number generation
+
+Expected performance improvements: 20-30% faster execution with 50% memory reduction using half-precision.
 
 ## Parameters
 

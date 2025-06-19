@@ -11,10 +11,10 @@ setup(
     version="0.1.0",
     author="Dong Liu and Yanxuan Yu",
     author_email="dong.liu.dl2367@yale.edu",
-    description="A general-purpose token compression framework for autoregressive models",
+    description="A general-purpose token compression framework for autoregressive models by Token Merging with Autoregressive Prior",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/QuickMerge",
+    url="https://github.com/NoakLiu/QuickMerge",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",

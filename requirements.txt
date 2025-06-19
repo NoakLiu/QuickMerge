@@ -1,5 +1,7 @@
 torch>=1.9.0
 numpy>=1.21.0
 scikit-learn>=1.0.0
-# Optional: CUDA toolkit for kernel acceleration
-# cuda-python>=11.0  # Uncomment if using CUDA kernels 
+# CUDA dependencies for kernel acceleration
+cuda-python>=11.0
+# Optional: for half-precision kernels
+# cuda-toolkit>=11.0 
