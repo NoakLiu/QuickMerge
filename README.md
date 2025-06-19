@@ -1,4 +1,4 @@
-# QuickMerge++
+# QuickMerge++: Token Merging with Autoregressive Prior
 
 A general-purpose token compression framework designed to accelerate autoregressive (AR) generative models across text, image, and video modalities.
 
@@ -127,13 +127,6 @@ x̃_k = Σ_{j∈G_k} (m̃_j * x_j) / Σ_{j'∈G_k} m̃_{j'}
 L_AR = L_forward + L_backward
 ```
 
-## Example Usage
-
-See `example.py` for a complete demonstration:
-
-```bash
-python example.py
-```
 
 ## Parameters
 
