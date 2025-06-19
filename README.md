@@ -127,6 +127,25 @@ x̃_k = Σ_{j∈G_k} (m̃_j * x_j) / Σ_{j'∈G_k} m̃_{j'}
 L_AR = L_forward + L_backward
 ```
 
+## CUDA Kernel Design
+
+QuickMerge++ provides optimized CUDA kernels for acceleration:
+
+1. **attention_entropy_kernel**
+   - 计算多层注意力熵，用于token显著性。
+   - $H_i = -\sum_j A_{ij} \log A_{ij}$
+
+2. **saliency_merging_kernel**
+   - 按聚类和显著性加权合并token。
+   - $\tilde{x}_k = \sum_{j \in G_k} (m_j x_j) / \sum_{j \in G_k} m_j$
+
+3. **cosine_similarity_kernel**
+   - 计算token对的余弦相似度。
+   - $\text{sim}_{ij} = \frac{x_i \cdot x_j}{\|x_i\|\|x_j\|}$
+
+4. **gumbel_softmax_kernel**
+   - Gumbel-Softmax采样，生成可微分mask。
+   - $\pi_i = \frac{\exp((s_i + g_i)/\tau)}{\sum_j \exp((s_j + g_j)/\tau)}$
 
 ## Parameters
 
