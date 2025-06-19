@@ -111,7 +111,7 @@ The QuickMerge++ inference pipeline follows these steps:
 ## Mathematical Formulation
 
 ### Saliency Score
-$$s_i = \frac{1}{L} \sum_l \text{Normalize}(H_i^{(l)})$$
+$s_i = \frac{1}{L} \sum_l \text{Normalize}(H_i^{(l)})$
 where $H_i^{(l)}$ is the attention entropy at layer l.
 
 ### Token Merging
