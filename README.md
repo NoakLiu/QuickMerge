@@ -132,7 +132,7 @@ QuickMerge++ provides optimized CUDA kernels for acceleration:
 
 2. **saliency_merging_kernel**
    - Merges tokens by clustering and saliency-weighted averaging
-   - $\tilde{x}_k = \sum_{j \in G_k} (m_j x_j) / \sum_{j \in G_k} m_j$
+   - $x_k = \sum_{j \in G_k} (m_j x_j) / \sum_{j \in G_k} m_j$
 
 3. **cosine_similarity_kernel**
    - Computes pairwise cosine similarity between tokens
