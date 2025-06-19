@@ -117,6 +117,7 @@ where $H_i^{(l)}$ is the attention entropy at layer l.
 ### Token Merging
 $\pi_i = \frac{\exp((s_i + g_i)/\tau)}{\sum_j \exp((s_j + g_j)/\tau)}$
 
+**Token merging with saliency weights:**
 $\tilde{x}_k = \sum_{j \in G_k} (m_j x_j) / \sum_{j \in G_k} m_j$
 
 ### AR Alignment Loss
