@@ -143,7 +143,7 @@ If you use QuickMerge++ in your research, please cite:
 
 ```bibtex
 @article{quickmergepp2024,
-  title={QuickMerge++: A General-Purpose Token Compression Framework for Autoregressive Models},
+  title={QuickMerge++: Token Merging with Autoregressive Prior},
   author={Dong Liu and Yanxuan Yu},
   journal={ICML 2025},
   year={2025}
